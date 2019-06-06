@@ -5,7 +5,7 @@ import { Button, Input } from '../Utils/Utils'
 
 export default class LoginForm extends Component {
   static defaultProps = {
-    onLoginSuccess: () => {}
+    onLoginSuccess: () => { }
   }
 
   state = { error: null }
@@ -14,7 +14,7 @@ export default class LoginForm extends Component {
     ev.preventDefault()
     this.setState({ error: null })
     const { user_name, password } = ev.target
-  
+
     AuthApiService.postLogin({
       user_name: user_name.value,
       password: password.value,
@@ -26,9 +26,10 @@ export default class LoginForm extends Component {
         this.props.onLoginSuccess()
       })
       .catch(res => {
+        console.log(res.error)
         this.setState({ error: res.error })
       })
-   }
+  }
 
   render() {
     const { error } = this.state
